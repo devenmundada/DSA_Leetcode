@@ -33,11 +33,25 @@ public:
     return dp[i];
     }
 
+    // Using bottom-up approch
+    int solveusingTab(vector<int>& nums){
+        int n = nums.size();
+        vector<int> dp(n+2,0);
+
+        for(int i = n-1;i >= 0;i--){
+        int include = nums[i] + dp[i+2];
+        int exclude = 0 + dp[i+1];
+        dp[i] = max(include,exclude);
+        }
+        return dp[0];
+    }
+
     int rob(vector<int>& nums) {
     //  return solve(nums,0);   
     int n = nums.size();
     vector<int> dp(n+1,-1);
     int i = 0;
-    return solvememo(nums,i,dp);
+    // return solvememo(nums,i,dp);
+    return solveusingTab(nums);
     }
 };
