@@ -28,10 +28,10 @@ public:
         dp[n] = solveusingmem(n-1,dp) + solveusingmem(n-2,dp);
         return dp[n];
     }
-
+// Approch :  BOTTOM-UP APPROCH
     int solveusingtabulation(int n){
         // step 1: create dp array
-        vector<int> dp(n+1,-1);
+        vector<int> dp(n+1,-1); 
         // step 2: analyze base cases and update dp array
         dp[0] = 0;
         if(n == 0){
@@ -49,11 +49,34 @@ public:
         return dp[n];
     }
 
+// space opitmazation approch
+     int solveusingtabulationOptimized(int n){
+        // step 1: create dp array
+        // vector<int> dp(n+1,-1); //no need to create array
+        // step 2: analyze base cases and update dp array
+        // dp[0] = 0;
+        if(n == 0 || n == 1){
+            return n;
+        }
+        int prev = 0;
+        int curr = 1;
+        // dp[1] = 1;
+        // step 3: check the parameter 
+        // recursion : n -> 0
+        // reverse : 0 -> n
+        for(int i = 2; i <= n;i++){ //i=2 because hume already i=0(0) and i=1(1) ans pata hai
+           int ans = curr + prev;
+           prev = curr; //previoues ko aage bada diya
+           curr = ans;
+    }
+    return curr;
+}
+
     int fib(int n) {
         // int ans = solveusingrecursion(n);
         // return ans;
     // step - 1 :
         // vector<int> dp(n+1,-1);
-         return solveusingtabulation(n);
+         return solveusingtabulationOptimized(n);
     } 
 };
