@@ -46,12 +46,31 @@ public:
         return dp[0];
     }
 
+
+    int solveUsingspaceopti(vector<int>&nums){
+        int n = nums.size();
+
+        int next1 = 0;
+        int next2 = 0;
+
+        for(int i = n-1;i>=0;i--){
+        int include = nums[i] + next2;
+        int exclude = 0 + next1;
+        int curr = max(include,exclude);
+        // Shifting -> ye yaad rakh na hai...bhul jaate hai
+        next2 = next1;
+        next1 = curr;
+        }
+        return next1;
+    }
+
     int rob(vector<int>& nums) {
     //  return solve(nums,0);   
     int n = nums.size();
     vector<int> dp(n+1,-1);
     int i = 0;
     // return solvememo(nums,i,dp);
-    return solveusingTab(nums);
+    // return solveusingTab(nums);
+    return solveUsingspaceopti(nums);
     }
 };
