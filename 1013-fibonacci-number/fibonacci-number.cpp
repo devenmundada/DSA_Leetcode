@@ -29,11 +29,31 @@ public:
         return dp[n];
     }
 
+    int solveusingtabulation(int n){
+        // step 1: create dp array
+        vector<int> dp(n+1,-1);
+        // step 2: analyze base cases and update dp array
+        dp[0] = 0;
+        if(n == 0){
+            return 0;
+        }
+        dp[1] = 1;
+        // step 3: check the parameter 
+        // recursion : n -> 0
+        // reverse : 0 -> n
+        for(int i = 2; i <= n;i++){ //i=2 because hume already i=0(0) and i=1(1) ans pata hai
+            // copy-paste
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        // answer return 
+        return dp[n];
+    }
+
     int fib(int n) {
         // int ans = solveusingrecursion(n);
         // return ans;
     // step - 1 :
-        vector<int> dp(n+1,-1);
-         return solveusingmem(n,dp);
+        // vector<int> dp(n+1,-1);
+         return solveusingtabulation(n);
     } 
 };
