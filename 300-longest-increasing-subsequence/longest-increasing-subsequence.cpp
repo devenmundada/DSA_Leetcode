@@ -1,63 +1,50 @@
 class Solution {
 public:
 
-    int solve(vector<int>& arr,int lastindex,int i){
+    int solveusingRec(vector<int>& arr,int curr,int prev){
         // base case
-        if(i >= arr.size()){
+        if(curr >= arr.size()){
             return 0;
         }
-        // 1 case hum solve karege baki recc
-        // increment tab he kar sakte hai jab last element curr element se bada ho
-        int curr = arr[i];
-        int inc = 0;
         // include
-        if(lastindex == -1 || curr > arr[lastindex]){
-            inc = 1 + solve(arr,i,i+1);
+        int inc = 0;
+        if(prev == -1 || arr[curr] > arr[prev]){
+            inc = 1 + solveusingRec(arr,curr+1,curr);
         }
-        // Exclude
-        int exc = 0 + solve(arr,lastindex,i+1);
-        
-        int finalAns = max(inc,exc);
-        return finalAns;
+        int exc = 0 + solveusingRec(arr,curr+1,prev);
+        int finalans = max(inc,exc);
+    return finalans;
     }
 
-
 // 2D - DP method because it is geeting TLE
-    int solveMemo(vector<int>& arr,int lastindex,int i,vector<vector<int>>& dp){
+
+     int solveusingMem(vector<int>& arr,int curr,int prev,vector<vector<int>> &dp){
         // base case
-        if(i >= arr.size()){
+        if(curr >= arr.size()){
             return 0;
         }
-        // step - 3 check if answer already exists?
-        if(dp[lastindex+1][i] != -1){
-            return dp[lastindex+1][i];
+        // Step 3:
+        if(dp[curr][prev+1] != -1){
+            return dp[curr][prev+1];
         }
 
-        // 1 case hum solve karege baki recc
-        // increment tab he kar sakte hai jab last element curr element se bada ho
-        int curr = arr[i];
-        int inc = 0;
         // include
-        if(lastindex == -1 || curr > arr[lastindex]){
-            inc = 1 + solveMemo(arr,i,i+1,dp);
+        int inc = 0;
+        if(prev == -1 || arr[curr] > arr[prev]){
+            inc = 1 + solveusingMem(arr,curr+1,curr,dp);
         }
-        // Exclude
-        int exc = 0 + solveMemo(arr,lastindex,i+1,dp);
-        // step 2: store and return in dp
-        dp[lastindex+1][i] = max(inc,exc);
-        return dp[lastindex+1][i];
+        int exc = 0 + solveusingMem(arr,curr+1,prev,dp);
+        dp[curr][prev+1] = max(inc,exc);
+        return dp[curr][prev+1];
     }
 
 
     int lengthOfLIS(vector<int>& nums) {
-        int lastindex = -1;
-        int i = 0;
-        // return solve(nums,lastindex,i);
-
-        // step 1: create and pass DP array
+        int curr = 0;
+        int prev = -1;
+        // return solveusingRec(nums,curr,prev);
         int n = nums.size();
-        vector<vector<int> > dp(n+2,vector<int>(n+1,-1));
-
-        return solveMemo(nums,lastindex,i,dp);
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return solveusingMem(nums,curr,prev,dp);
     }
 };
