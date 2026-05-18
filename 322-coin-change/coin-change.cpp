@@ -53,6 +53,29 @@ public:
         dp[amount] = minCoinAns;
         return dp[amount];
     }
+    // solving using bottom-up approch
+    int solveusingTab(vector<int>&coins,int amount){
+        vector<int> dp(amount+1,-1);
+        dp[0] = 0;
+
+        for(int amt = 1;amt <= amount;amt++){
+    // logic
+        int minCoinAns = INT_MAX;
+        for (int i = 0; i < coins.size(); i++) {
+            int coin = coins[i];
+            if (coin <= amt) {
+                int recursionAns = dp[amt - coin];
+                if (recursionAns != INT_MAX) {
+                    int coinUsed = 1 + recursionAns;
+                    minCoinAns = min(minCoinAns, coinUsed);
+                }
+            }
+        }
+        // step 2:dp ans store and return
+        dp[amt] = minCoinAns;
+    }
+    return dp[amount];
+}
 
     int coinChange(vector<int>& coins, int amount){
         //     int ans = solve(coins,amount);
