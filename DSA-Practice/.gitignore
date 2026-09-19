@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# C/C++ build files
+build/
+*.o
+*.out
+a.out
+
+# VS Code
+.vscode/
+
+# Common compiled executables
+*.exe
