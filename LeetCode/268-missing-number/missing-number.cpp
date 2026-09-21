@@ -19,8 +19,8 @@ public:
             ans ^= nums[i];
         }
         // 2. XOR the range intems
-        int N = nums.size();
-        for(int i = 0;i <= N;i++){
+        // int N = nums.size();
+        for(int i = 0;i <= nums.size();i++){
             ans ^= i;
         }
         return ans;
