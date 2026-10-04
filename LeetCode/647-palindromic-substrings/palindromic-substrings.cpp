@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int expandAroundCenter(string s, int i, int j) {
+    int expandAroundCenter(string str, int i, int j) {
         int count = 0;
-        while (i >= 0 && j <= s.size() && s[i] == s[j]) {
+        while (i >= 0 && j <= str.size() && str[i] == str[j]) {
             count++;
             i--;
             j++;
