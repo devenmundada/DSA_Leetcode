@@ -2,26 +2,30 @@ class Solution {
 public:
     int minInsertions(string s) {
         int ans = 0;
-        int need = 0;
-        for(int i = 0;i < s.length();i++){
+        int open = 0;
+       
+        for(int i = 0;i < s.size();i++){
             if(s[i] == '('){
-                
-                if(need % 2 == 1){
-                    ans++;
-                    need--;
-                }
-                    need += 2;
+                open++;
             }
-            else{
-                need--;
-
-                if(need < 0){
+            else{ 
+    
+                // we need a pair of the consecutive ')'
+                if(i+1 < s.size() && s[i+1] == ')'){
+                    i++;
+                }
+                else{
+                    // insert the missing ')'
                     ans++;
-                    need = 1;
+                }
+                if(open > 0){
+                    open--;
+                }
+                else{
+                    ans++;
                 }
             }
-
         }
-        return ans + need;
+        return ans + open*2;
     }
 };
