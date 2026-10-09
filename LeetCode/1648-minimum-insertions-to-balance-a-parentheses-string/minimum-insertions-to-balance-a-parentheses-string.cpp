@@ -17,7 +17,7 @@ public:
 
                 if(need < 0){
                     ans++;
-                    need  = 1;
+                    need = 1;
                 }
             }
 
