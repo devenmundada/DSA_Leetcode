@@ -9,8 +9,10 @@ public:
 
     int numberOfBeams(vector<string>& bank) {
         vector<int> devices;
-        for (int row = 0; row < bank.size(); row++) 
-            devices.push_back(CountDevices(bank[row]));
+        // for (int row = 0; row < bank.size(); row++) 
+        for(auto row : bank)
+            // devices.push_back(CountDevices(bank[row]));
+            devices.push_back(CountDevices(row));
         
         int beams = 0;
 
